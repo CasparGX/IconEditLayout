@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="iconWidth" format="dimension" />
-    <attr name="iconHeight" format="dimension" />
-    <attr name="iconSrc" format="reference" />
-
     <declare-styleable name="IconEditLayout">
-        <attr name="iconWidth" />
-        <attr name="iconHeight"/>
-        <attr name="iconSrc" />
+        <attr name="iconWidth" format="dimension" />
+        <attr name="iconHeight" format="dimension" />
+        <attr name="iconSrc" format="reference" />
+
+        <attr name="splitLineWidth" format="dimension" />
+        <attr name="splitLineMarginLeft" format="dimension" />
+        <attr name="splitLineMarginTop" format="dimension" />
+        <attr name="splitLineMarginRight" format="dimension" />
+        <attr name="splitLineMarginBottom" format="dimension" />
+        <attr name="splitLineColor" format="color" />
+
+        <attr name="iconEditTextSize" format="dimension"/>
+        <attr name="iconEditTextColor" format="color"/>
+        <attr name="iconEditText" format="string"/>
+
+        <attr name="layoutBackground" format="color"/>
+        <attr name="layoutPadding" format="dimension"/>
+        <attr name="layoutPaddingLeft" format="dimension"/>
+        <attr name="layoutPaddingRight" format="dimension"/>
+        <attr name="layoutPaddingTop" format="dimension"/>
+        <attr name="layoutPaddingBottom" format="dimension"/>
+        <attr name="layoutRadius" format="dimension"/>
     </declare-styleable>
 </resources>

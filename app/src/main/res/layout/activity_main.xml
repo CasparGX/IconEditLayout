@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eee"
+    android:gravity="center"
     tools:context="cc.xaabb.iconeditlayout.MainActivity">
 
     <cc.xaabb.iconeditlayout.IconEditLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        app:iconHeight="10dp"
-        app:iconWidth="10dp"
-        app:iconSrc="@mipmap/ic_launcher"/>
-</RelativeLayout>
+        android:layout_margin="50dp"
+        android:minWidth="200dp"
+        app:layoutPadding="4dp"
+        app:layoutPaddingLeft="10dp"
+        app:layoutPaddingRight="10dp"
+        app:layoutBackground="@android:color/white"
+        app:layoutRadius="6dp"
+        app:splitLineWidth="1px"
+        app:splitLineColor="#999"
+        app:iconHeight="24dp"
+        app:iconWidth="24dp"
+        app:iconSrc="@mipmap/ic_launcher"
+        app:iconEditText="123"
+        app:iconEditTextSize="12sp"
+        />
+</LinearLayout>

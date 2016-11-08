@@ -30,10 +30,10 @@ public class IconEditLayout extends LinearLayout {
     private LayoutParams layoutParams;
     private int layoutPadding = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
-    private int layoutPaddingLeft = layoutPadding;
-    private int layoutPaddingRight = layoutPadding;
-    private int layoutPaddingTop = layoutPadding;
-    private int layoutPaddingBottom = layoutPadding;
+    private int layoutPaddingLeft = 0;
+    private int layoutPaddingRight = 0;
+    private int layoutPaddingTop = 0;
+    private int layoutPaddingBottom = 0;
     private int layoutRadius = 0;
     private int layoutColor = Color.parseColor("#FFFFFF");
     private int layoutStrokeWidth = (int) TypedValue.applyDimension(
@@ -51,9 +51,9 @@ public class IconEditLayout extends LinearLayout {
     //---------------分割线splitLine----------------
     private View mViewSplitLine;
     private float splitLineWidth = 0;
-    private int splitLineMarginLeft = layoutPadding;
+    private int splitLineMarginLeft = 0;
     private int splitLineMarginTop = 0;
-    private int splitLineMarginRight = layoutPadding;
+    private int splitLineMarginRight = 0;
     private int splitLineMarginBottom = 0;
     private int splitLineColor = Color.parseColor("#999999");
 
@@ -96,6 +96,24 @@ public class IconEditLayout extends LinearLayout {
                 case R.styleable.IconEditLayout_layoutPadding:
                     layoutPadding = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
+                    if (layoutPaddingLeft==0) {
+                        layoutPaddingLeft = layoutPadding;
+                    }
+                    if (layoutPaddingTop==0) {
+                        layoutPaddingTop = layoutPadding;
+                    }
+                    if (layoutPaddingRight==0) {
+                        layoutPaddingRight = layoutPadding;
+                    }
+                    if (layoutPaddingBottom==0) {
+                        layoutPaddingBottom = layoutPadding;
+                    }
+                    if (splitLineMarginLeft==0) {
+                        splitLineMarginLeft = layoutPadding;
+                    }
+                    if (splitLineMarginRight==0) {
+                        splitLineMarginRight = layoutPadding;
+                    }
                     break;
                 case R.styleable.IconEditLayout_layoutPaddingLeft:
                     layoutPaddingLeft = a.getDimensionPixelSize(attr, layoutPadding);
@@ -184,7 +202,7 @@ public class IconEditLayout extends LinearLayout {
         this.setGravity(Gravity.CENTER_VERTICAL);
         this.setOrientation(HORIZONTAL);
         GradientDrawable background = (GradientDrawable) CornerUtil.cornerDrawable(layoutColor, layoutRadius);
-        background.setStroke(layoutStrokeWidth, layoutStrokeColor);
+        background = CornerUtil.strokeDrawable(background, layoutStrokeWidth, layoutStrokeColor);
         this.setBackground(background);
         this.setPadding(layoutPaddingLeft,layoutPaddingTop,layoutPaddingRight,layoutPaddingBottom);
     }
@@ -279,6 +297,11 @@ public class IconEditLayout extends LinearLayout {
             GradientDrawable bg = new GradientDrawable();
             bg.setCornerRadius(cornerRadius);
             bg.setColor(bgColor);
+            return bg;
+        }
+
+        public static GradientDrawable strokeDrawable(GradientDrawable bg, int width, int color) {
+            bg.setStroke(width, color);
             return bg;
         }
     }

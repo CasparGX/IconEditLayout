@@ -1,15 +1,12 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加//
 
-//配置插件方法1
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-//提交到仓库中的版本号
-version = "1.0.0"
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.3"
+    buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId "cc.xaabb.iconeditlayout"
+        //applicationId "cc.xaabb.iconeditlayout"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
@@ -22,7 +19,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -33,82 +34,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-//方法1
-def siteUrl = 'https://github.com/CasparGX/IconEditLayout'      // 项目的主页   这个是说明，可随便填
-def gitUrl = 'https://github.com/CasparGX/IconEditLayout'      // Git仓库的url  这个是说明，可随便填
-group = "cc.xaabb"    // 这里是groupId ,必须填写  一般填你唯一的包名
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-                // Add your description here
-                name 'IconEditLayout'     //项目描述
-                url siteUrl
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'CasparGX'        //填写开发者的一些基本信息
-                        name 'CasparGX'    //填写开发者的一些基本信息
-                        email 'casparx95@gmail.com'   //填写开发者的一些基本信息
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user = properties.getProperty("bintray.user")    //读取 local.properties 文件里面的 bintray.user
-    key = properties.getProperty("bintray.apikey")   //读取 local.properties 文件里面的 bintray.apikey
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "IconEditLayout"    //发布到JCenter上的项目名字，必须填写
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-    }
-}
-
-javadoc {
-    options{
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        author true
-        version true
-        links "http://docs.oracle.com/javase/7/docs/api"
-    }
+publish {
+    userOrg = 'caspargx'//bintray.com用户名
+    groupId = 'cc.xaabb'//jcenter上的路径
+    artifactId = 'iconeditlayout'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    website = 'https://github.com/CasparGX/IconEditLayout'
 }

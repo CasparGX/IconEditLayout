@@ -88,102 +88,99 @@ public class IconEditLayout extends LinearLayout {
         int n = a.getIndexCount();
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
-            switch (attr) {
-                //---------------整体布局layout----------------
-                case R.styleable.IconEditLayout_layoutBackground:
-                    layoutColor = a.getColor(attr, Color.parseColor("#FFFFFF"));
-                    break;
-                case R.styleable.IconEditLayout_layoutPadding:
-                    layoutPadding = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
-                    if (layoutPaddingLeft==0) {
-                        layoutPaddingLeft = layoutPadding;
-                    }
-                    if (layoutPaddingTop==0) {
-                        layoutPaddingTop = layoutPadding;
-                    }
-                    if (layoutPaddingRight==0) {
-                        layoutPaddingRight = layoutPadding;
-                    }
-                    if (layoutPaddingBottom==0) {
-                        layoutPaddingBottom = layoutPadding;
-                    }
-                    if (splitLineMarginLeft==0) {
-                        splitLineMarginLeft = layoutPadding;
-                    }
-                    if (splitLineMarginRight==0) {
-                        splitLineMarginRight = layoutPadding;
-                    }
-                    break;
-                case R.styleable.IconEditLayout_layoutPaddingLeft:
-                    layoutPaddingLeft = a.getDimensionPixelSize(attr, layoutPadding);
-                    break;
-                case R.styleable.IconEditLayout_layoutPaddingRight:
-                    layoutPaddingRight = a.getDimensionPixelSize(attr, layoutPadding);
-                    break;
-                case R.styleable.IconEditLayout_layoutPaddingTop:
-                    layoutPaddingTop = a.getDimensionPixelSize(attr, layoutPadding);
-                    break;
-                case R.styleable.IconEditLayout_layoutPaddingBottom:
-                    layoutPaddingBottom = a.getDimensionPixelSize(attr, layoutPadding);
-                    break;
-                case R.styleable.IconEditLayout_layoutRadius:
-                    layoutRadius = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.IconEditLayout_layoutStrokeColor:
-                    layoutStrokeColor = a.getColor(attr, Color.parseColor("#999999"));
-                    break;
-                case R.styleable.IconEditLayout_layoutStrokeWidth:
-                    layoutStrokeWidth = a.getDimensionPixelSize(attr, 0);
-                    break;
+            if (attr == R.styleable.IconEditLayout_layoutBackground) {
+                layoutColor = a.getColor(attr, Color.parseColor("#FFFFFF"));
+
+            } else if (attr == R.styleable.IconEditLayout_layoutPadding) {
+                layoutPadding = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
+                if (layoutPaddingLeft == 0) {
+                    layoutPaddingLeft = layoutPadding;
+                }
+                if (layoutPaddingTop == 0) {
+                    layoutPaddingTop = layoutPadding;
+                }
+                if (layoutPaddingRight == 0) {
+                    layoutPaddingRight = layoutPadding;
+                }
+                if (layoutPaddingBottom == 0) {
+                    layoutPaddingBottom = layoutPadding;
+                }
+                if (splitLineMarginLeft == 0) {
+                    splitLineMarginLeft = layoutPadding;
+                }
+                if (splitLineMarginRight == 0) {
+                    splitLineMarginRight = layoutPadding;
+                }
+
+            } else if (attr == R.styleable.IconEditLayout_layoutPaddingLeft) {
+                layoutPaddingLeft = a.getDimensionPixelSize(attr, layoutPadding);
+
+            } else if (attr == R.styleable.IconEditLayout_layoutPaddingRight) {
+                layoutPaddingRight = a.getDimensionPixelSize(attr, layoutPadding);
+
+            } else if (attr == R.styleable.IconEditLayout_layoutPaddingTop) {
+                layoutPaddingTop = a.getDimensionPixelSize(attr, layoutPadding);
+
+            } else if (attr == R.styleable.IconEditLayout_layoutPaddingBottom) {
+                layoutPaddingBottom = a.getDimensionPixelSize(attr, layoutPadding);
+
+            } else if (attr == R.styleable.IconEditLayout_layoutRadius) {
+                layoutRadius = a.getDimensionPixelSize(attr, 0);
+
+            } else if (attr == R.styleable.IconEditLayout_layoutStrokeColor) {
+                layoutStrokeColor = a.getColor(attr, Color.parseColor("#999999"));
+
+            } else if (attr == R.styleable.IconEditLayout_layoutStrokeWidth) {
+                layoutStrokeWidth = a.getDimensionPixelSize(attr, 0);
+
 
                 //---------------分割线splitLine----------------
-                case R.styleable.IconEditLayout_splitLineWidth:
-                    splitLineWidth = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.IconEditLayout_splitLineMarginLeft:
-                    splitLineMarginLeft = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.IconEditLayout_splitLineMarginTop:
-                    splitLineMarginTop = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.IconEditLayout_splitLineMarginRight:
-                    splitLineMarginRight = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.IconEditLayout_splitLineMarginBottom:
-                    splitLineMarginBottom = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.IconEditLayout_splitLineColor:
-                    splitLineColor = a.getColor(attr, Color.parseColor("#999999"));
-                    break;
+            } else if (attr == R.styleable.IconEditLayout_splitLineWidth) {
+                splitLineWidth = a.getDimensionPixelSize(attr, 0);
+
+            } else if (attr == R.styleable.IconEditLayout_splitLineMarginLeft) {
+                splitLineMarginLeft = a.getDimensionPixelSize(attr, 0);
+
+            } else if (attr == R.styleable.IconEditLayout_splitLineMarginTop) {
+                splitLineMarginTop = a.getDimensionPixelSize(attr, 0);
+
+            } else if (attr == R.styleable.IconEditLayout_splitLineMarginRight) {
+                splitLineMarginRight = a.getDimensionPixelSize(attr, 0);
+
+            } else if (attr == R.styleable.IconEditLayout_splitLineMarginBottom) {
+                splitLineMarginBottom = a.getDimensionPixelSize(attr, 0);
+
+            } else if (attr == R.styleable.IconEditLayout_splitLineColor) {
+                splitLineColor = a.getColor(attr, Color.parseColor("#999999"));
+
 
                 //---------------图标icon----------------
-                case R.styleable.IconEditLayout_iconHeight:
-                    mImgIconHeight = a.getDimensionPixelSize(attr, 30);
-                    break;
-                case R.styleable.IconEditLayout_iconWidth:
-                    mImgIconWidth = a.getDimensionPixelSize(attr, 30);
-                    break;
-                case R.styleable.IconEditLayout_iconSrc:
-                    mImgIconSrc = a.getDrawable(attr);
-                    break;
+            } else if (attr == R.styleable.IconEditLayout_iconHeight) {
+                mImgIconHeight = a.getDimensionPixelSize(attr, 30);
+
+            } else if (attr == R.styleable.IconEditLayout_iconWidth) {
+                mImgIconWidth = a.getDimensionPixelSize(attr, 30);
+
+            } else if (attr == R.styleable.IconEditLayout_iconSrc) {
+                mImgIconSrc = a.getDrawable(attr);
+
 
                 //---------------输入框EditText----------------
-                case R.styleable.IconEditLayout_iconEditText:
-                    mEditTextString = a.getString(attr);
-                    break;
-                case R.styleable.IconEditLayout_iconEditTextColor:
-                    mEditTextColor = a.getColor(attr, Color.parseColor("#000000"));
-                    break;
-                case R.styleable.IconEditLayout_iconEditTextSize:
-                    mEditTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
-                    break;
+            } else if (attr == R.styleable.IconEditLayout_iconEditText) {
+                mEditTextString = a.getString(attr);
+
+            } else if (attr == R.styleable.IconEditLayout_iconEditTextColor) {
+                mEditTextColor = a.getColor(attr, Color.parseColor("#000000"));
+
+            } else if (attr == R.styleable.IconEditLayout_iconEditTextSize) {
+                mEditTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
+
 
                 //---------------清空按钮imgBtn----------------
-                case R.styleable.IconEditLayout_showDeleteButton:
-                    isShowClearBtn = a.getBoolean(attr, true);
-                    break;
+            } else if (attr == R.styleable.IconEditLayout_showDeleteButton) {
+                isShowClearBtn = a.getBoolean(attr, true);
 
             }
         }

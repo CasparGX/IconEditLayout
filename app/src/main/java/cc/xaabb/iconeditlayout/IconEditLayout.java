@@ -7,7 +7,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -33,6 +36,9 @@ public class IconEditLayout extends LinearLayout {
     private int layoutPaddingBottom = layoutPadding;
     private int layoutRadius = 0;
     private int layoutColor = Color.parseColor("#FFFFFF");
+    private int layoutStrokeWidth = (int) TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
+    private int layoutStrokeColor = Color.parseColor("#999999");
 
     //---------------图标icon----------------
     private ImageView mImgIcon;
@@ -58,7 +64,10 @@ public class IconEditLayout extends LinearLayout {
     private int mEditTextColor = Color.parseColor("#999999");
     private String mEditTextString;
 
-    private Paint mImgIconPaint;
+
+    //---------------清空imgBtn----------------
+    private ImageView mImgClearBtn;
+    private boolean isShowClearBtn = true;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public IconEditLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -102,6 +111,12 @@ public class IconEditLayout extends LinearLayout {
                     break;
                 case R.styleable.IconEditLayout_layoutRadius:
                     layoutRadius = a.getDimensionPixelSize(attr, 0);
+                    break;
+                case R.styleable.IconEditLayout_layoutStrokeColor:
+                    layoutStrokeColor = a.getColor(attr, Color.parseColor("#999999"));
+                    break;
+                case R.styleable.IconEditLayout_layoutStrokeWidth:
+                    layoutStrokeWidth = a.getDimensionPixelSize(attr, 0);
                     break;
 
                 //---------------分割线splitLine----------------
@@ -147,6 +162,10 @@ public class IconEditLayout extends LinearLayout {
                             TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
                     break;
 
+                //---------------清空按钮imgBtn----------------
+                case R.styleable.IconEditLayout_showDeleteButton:
+                    isShowClearBtn = a.getBoolean(attr, true);
+                    break;
 
             }
         }
@@ -158,13 +177,15 @@ public class IconEditLayout extends LinearLayout {
         initIcon(context);
         initSplitLine(context);
         initEdit(context);
+        initClearBtn(context);
     }
-
 
     private void initLayout(Context context) {
         this.setGravity(Gravity.CENTER_VERTICAL);
         this.setOrientation(HORIZONTAL);
-        this.setBackground(CornerUtil.cornerDrawable(layoutColor, layoutRadius));
+        GradientDrawable background = (GradientDrawable) CornerUtil.cornerDrawable(layoutColor, layoutRadius);
+        background.setStroke(layoutStrokeWidth, layoutStrokeColor);
+        this.setBackground(background);
         this.setPadding(layoutPaddingLeft,layoutPaddingTop,layoutPaddingRight,layoutPaddingBottom);
     }
 
@@ -180,6 +201,9 @@ public class IconEditLayout extends LinearLayout {
     }
 
     private void initSplitLine(Context context) {
+        if (splitLineWidth <= 0) {
+            return;
+        }
         mViewSplitLine = new View(context);
         LayoutParams param = new LayoutParams((int) splitLineWidth, ViewGroup.LayoutParams.MATCH_PARENT);
         param.bottomMargin = splitLineMarginBottom;
@@ -195,15 +219,60 @@ public class IconEditLayout extends LinearLayout {
         mEditText = new EditText(context);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.weight = 1;
+        params.rightMargin = layoutRadius;
+        params.gravity = Gravity.CENTER_VERTICAL;
         mEditText.setLayoutParams(params);
+        mEditText.setSingleLine(true);
         mEditText.setPadding(0,0,0,0);
         mEditText.setText(mEditTextString);
         mEditText.setTextSize(mEditTextSize);
         mEditText.setTextColor(mEditTextColor);
         mEditText.setBackgroundColor(layoutColor);
+        //set listener show clear button when EditText has text
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isShowClearBtn && s.length() > 0) {
+                    mImgClearBtn.setVisibility(VISIBLE);
+                } else {
+                    mImgClearBtn.setVisibility(GONE);
+                }
+
+            }
+        });
         addView(mEditText);
     }
 
+    private void initClearBtn(Context context) {
+        if (!isShowClearBtn) {
+            return;
+        }
+        mImgClearBtn = new ImageView(context);
+        LayoutParams param = new LayoutParams(mImgIconWidth, mImgIconWidth);
+        param.gravity = Gravity.RIGHT;
+        param.gravity = Gravity.CENTER_VERTICAL;
+        mImgClearBtn.setLayoutParams(param);
+        mImgClearBtn.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        mImgClearBtn.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_close));
+        //set listener clear EditText's text when mImgClearBtn click
+        mImgClearBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditText.setText("");
+            }
+        });
+        addView(mImgClearBtn);
+    }
 
     public static class CornerUtil {
         public static Drawable cornerDrawable(int bgColor, float cornerRadius) {

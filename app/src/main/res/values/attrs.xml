@@ -23,5 +23,9 @@
         <attr name="layoutPaddingTop" format="dimension"/>
         <attr name="layoutPaddingBottom" format="dimension"/>
         <attr name="layoutRadius" format="dimension"/>
+        <attr name="layoutStrokeWidth" format="dimension"/>
+        <attr name="layoutStrokeColor" format="color"/>
+
+        <attr name="showDeleteButton" format="boolean"/>
     </declare-styleable>
 </resources>

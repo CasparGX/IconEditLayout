@@ -213,7 +213,6 @@ public class IconEditLayout extends LinearLayout {
         param.gravity = Gravity.LEFT;
         param.gravity = Gravity.CENTER_VERTICAL;
         mImgIcon.setLayoutParams(param);
-        mImgIcon.setId(R.id.img_id);
         mImgIcon.setImageDrawable(mImgIconSrc);
         addView(mImgIcon);
     }

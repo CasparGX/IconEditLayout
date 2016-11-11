@@ -30,10 +30,10 @@ public class IconEditLayout extends LinearLayout {
     private LayoutParams layoutParams;
     private int layoutPadding = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
-    private int layoutPaddingLeft = 0;
-    private int layoutPaddingRight = 0;
-    private int layoutPaddingTop = 0;
-    private int layoutPaddingBottom = 0;
+    private int layoutPaddingLeft = layoutPadding;
+    private int layoutPaddingRight = layoutPadding;
+    private int layoutPaddingTop = layoutPadding;
+    private int layoutPaddingBottom = layoutPadding;
     private int layoutRadius = 0;
     private int layoutColor = Color.parseColor("#FFFFFF");
     private int layoutStrokeWidth = (int) TypedValue.applyDimension(
@@ -187,6 +187,7 @@ public class IconEditLayout extends LinearLayout {
         a.recycle();
         init(context);
     }
+
     private void init(Context context) {
         initLayout(context);
         initIcon(context);
@@ -201,7 +202,10 @@ public class IconEditLayout extends LinearLayout {
         GradientDrawable background = (GradientDrawable) CornerUtil.cornerDrawable(layoutColor, layoutRadius);
         background = CornerUtil.strokeDrawable(background, layoutStrokeWidth, layoutStrokeColor);
         this.setBackground(background);
-        this.setPadding(layoutPaddingLeft,layoutPaddingTop,layoutPaddingRight,layoutPaddingBottom);
+        this.setPadding(layoutPaddingLeft + layoutStrokeWidth,
+                layoutPaddingTop + layoutStrokeWidth,
+                layoutPaddingRight + layoutStrokeWidth,
+                layoutPaddingBottom + layoutStrokeWidth);
     }
 
     private void initIcon(Context context) {
@@ -233,11 +237,15 @@ public class IconEditLayout extends LinearLayout {
         mEditText = new EditText(context);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.weight = 1;
+//        int dp1 = (int) TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
+//        params.topMargin = dp1;
+//        params.bottomMargin = dp1;
         params.rightMargin = layoutRadius;
         params.gravity = Gravity.CENTER_VERTICAL;
         mEditText.setLayoutParams(params);
         mEditText.setSingleLine(true);
-        mEditText.setPadding(0,0,0,0);
+        mEditText.setPadding(0, 0, 0, 0);
         mEditText.setText(mEditTextString);
         mEditText.setTextSize(mEditTextSize);
         mEditText.setTextColor(mEditTextColor);

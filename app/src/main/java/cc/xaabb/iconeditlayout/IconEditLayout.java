@@ -84,7 +84,7 @@ public class IconEditLayout extends LinearLayout {
 
     public IconEditLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.IconEditLayout, defStyleAttr, 0);
+        /*TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.IconEditLayout, defStyleAttr, 0);
         int n = a.getIndexCount();
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
@@ -184,11 +184,71 @@ public class IconEditLayout extends LinearLayout {
 
             }
         }
-        a.recycle();
-        init(context);
+        a.recycle();*/
+        init(context, attrs);
     }
 
-    private void init(Context context) {
+    private void init(Context context, AttributeSet attrs) {
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.IconEditLayout);
+            layoutColor = a.getColor(R.styleable.IconEditLayout_layoutBackground, Color.parseColor("#FFFFFF"));
+            layoutPadding = a.getDimensionPixelSize(R.styleable.IconEditLayout_layoutPadding, (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
+            layoutPaddingLeft = a.getDimensionPixelSize(R.styleable.IconEditLayout_layoutPaddingLeft, layoutPadding);
+
+            layoutPaddingRight = a.getDimensionPixelSize(R.styleable.IconEditLayout_layoutPaddingRight, layoutPadding);
+
+            layoutPaddingTop = a.getDimensionPixelSize(R.styleable.IconEditLayout_layoutPaddingTop, layoutPadding);
+
+            layoutPaddingBottom = a.getDimensionPixelSize(R.styleable.IconEditLayout_layoutPaddingBottom, layoutPadding);
+
+            layoutRadius = a.getDimensionPixelSize(R.styleable.IconEditLayout_layoutRadius, (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
+
+            layoutStrokeColor = a.getColor(R.styleable.IconEditLayout_layoutStrokeColor, Color.parseColor("#999999"));
+
+            layoutStrokeWidth = a.getDimensionPixelSize(R.styleable.IconEditLayout_layoutStrokeWidth, (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
+
+
+            //---------------分割线splitLine----------------
+            splitLineWidth = a.getDimensionPixelSize(R.styleable.IconEditLayout_splitLineWidth, (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
+
+            splitLineMarginLeft = a.getDimensionPixelSize(R.styleable.IconEditLayout_splitLineMarginLeft, (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
+
+            splitLineMarginTop = a.getDimensionPixelSize(R.styleable.IconEditLayout_splitLineMarginTop, 0);
+
+            splitLineMarginRight = a.getDimensionPixelSize(R.styleable.IconEditLayout_splitLineMarginRight, 0);
+
+            splitLineMarginBottom = a.getDimensionPixelSize(R.styleable.IconEditLayout_splitLineMarginBottom, 0);
+
+            splitLineColor = a.getColor(R.styleable.IconEditLayout_splitLineColor, Color.parseColor("#999999"));
+
+
+            //---------------图标icon----------------
+            mImgIconHeight = a.getDimensionPixelSize(R.styleable.IconEditLayout_iconHeight, 30);
+
+            mImgIconWidth = a.getDimensionPixelSize(R.styleable.IconEditLayout_iconWidth, 30);
+
+            mImgIconSrc = a.getDrawable(R.styleable.IconEditLayout_iconSrc);
+
+
+            //---------------输入框EditText----------------
+            mEditTextString = a.getString(R.styleable.IconEditLayout_iconEditText);
+
+            mEditTextColor = a.getColor(R.styleable.IconEditLayout_iconEditTextColor, Color.parseColor("#000000"));
+
+            mEditTextSize = a.getDimensionPixelSize(R.styleable.IconEditLayout_iconEditTextSize, (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
+
+
+            //---------------清空按钮imgBtn----------------
+            isShowClearBtn = a.getBoolean(R.styleable.IconEditLayout_showDeleteButton, true);
+
+        a.recycle();
+
         initLayout(context);
         initIcon(context);
         initSplitLine(context);

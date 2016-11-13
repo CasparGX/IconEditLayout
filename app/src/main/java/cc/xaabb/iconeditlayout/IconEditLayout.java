@@ -4,10 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,6 +26,7 @@ public class IconEditLayout extends LinearLayout {
 
     //region---------------整体布局layout----------------
     private LayoutParams layoutParams;
+    private GradientDrawable layoutBackground;
     private int layoutPadding = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
     private int layoutPaddingLeft = layoutPadding;
@@ -163,9 +162,7 @@ public class IconEditLayout extends LinearLayout {
     private void initLayout(Context context) {
         this.setGravity(Gravity.CENTER_VERTICAL);
         this.setOrientation(HORIZONTAL);
-        GradientDrawable background = (GradientDrawable) CornerUtil.cornerDrawable(layoutColor, layoutRadius);
-        background = CornerUtil.strokeDrawable(background, layoutStrokeWidth, layoutStrokeColor);
-        this.setBackground(background);
+        setLayoutBackground();
         setLayoutPadding(layoutPaddingLeft, layoutPaddingTop, layoutPaddingRight, layoutPaddingBottom, layoutStrokeWidth);
     }
 
@@ -198,10 +195,6 @@ public class IconEditLayout extends LinearLayout {
         mEditText = new EditText(context);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.weight = 1;
-//        int dp1 = (int) TypedValue.applyDimension(
-//                TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
-//        params.topMargin = dp1;
-//        params.bottomMargin = dp1;
         params.rightMargin = layoutRadius;
         params.gravity = Gravity.CENTER_VERTICAL;
         mEditText.setLayoutParams(params);
@@ -279,14 +272,44 @@ public class IconEditLayout extends LinearLayout {
                 layoutPaddingRight + layoutStrokeWidth,
                 layoutPaddingBottom + layoutStrokeWidth);
     }
+
+    private void setLayoutBackground() {
+        layoutBackground = new GradientDrawable();
+        layoutBackground = CornerUtil.cornerDrawable(layoutBackground, layoutColor, layoutRadius);
+        layoutBackground = CornerUtil.strokeDrawable(layoutBackground, layoutStrokeWidth, layoutStrokeColor);
+        this.setBackground(layoutBackground);
+        mEditText.setBackgroundColor(layoutColor);
+    }
+    public void setLayoutBackground(int bgColor, int layoutRadius, int strokeWidth, int strokeColor) {
+        this.layoutColor = bgColor;
+        this.layoutRadius = layoutRadius;
+        this.layoutStrokeWidth = strokeWidth;
+        this.layoutStrokeColor = strokeColor;
+        this.setLayoutBackground();
+    }
+
+    public void setLayoutStrokeColor(int layoutStrokeColor) {
+        this.layoutStrokeColor = layoutStrokeColor;
+    }
+
+    public void setLayoutStrokeWidth(int layoutStrokeWidth) {
+        this.layoutStrokeWidth = layoutStrokeWidth;
+    }
+
+    public void setLayoutRadius(int layoutRadius) {
+        this.layoutRadius = layoutRadius;
+    }
+
+    public void setLayoutColor(int layoutColor) {
+        this.layoutColor = layoutColor;
+    }
     //endregion
 
 
 
 
     public static class CornerUtil {
-        public static Drawable cornerDrawable(int bgColor, float cornerRadius) {
-            GradientDrawable bg = new GradientDrawable();
+        public static GradientDrawable cornerDrawable(GradientDrawable bg, int bgColor, float cornerRadius) {
             bg.setCornerRadius(cornerRadius);
             bg.setColor(bgColor);
             return bg;

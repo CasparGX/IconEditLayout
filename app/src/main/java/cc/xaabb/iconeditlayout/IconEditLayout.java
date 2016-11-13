@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 
 public class IconEditLayout extends LinearLayout {
 
-    //---------------整体布局layout----------------
+    //region---------------整体布局layout----------------
     private LayoutParams layoutParams;
     private int layoutPadding = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
@@ -39,16 +39,18 @@ public class IconEditLayout extends LinearLayout {
     private int layoutStrokeWidth = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
     private int layoutStrokeColor = Color.parseColor("#999999");
+    //endregion
 
-    //---------------图标icon----------------
+    //region---------------图标icon----------------
     private ImageView mImgIcon;
     private int mImgIconWidth = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics());
     private int mImgIconHeight = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics());
     private Drawable mImgIconSrc;
+    //endregion
 
-    //---------------分割线splitLine----------------
+    //region---------------分割线splitLine----------------
     private View mViewSplitLine;
     private float splitLineWidth = 0;
     private int splitLineMarginLeft = 0;
@@ -56,18 +58,21 @@ public class IconEditLayout extends LinearLayout {
     private int splitLineMarginRight = 0;
     private int splitLineMarginBottom = 0;
     private int splitLineColor = Color.parseColor("#999999");
+    //endregion
 
-    //---------------输入框EditText----------------
+    //region---------------输入框EditText----------------
     private EditText mEditText;
     private float mEditTextSize = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics());
     private int mEditTextColor = Color.parseColor("#999999");
     private String mEditTextString;
+    //endregion
 
 
-    //---------------清空imgBtn----------------
+    //region---------------清空imgBtn----------------
     private ImageView mImgClearBtn;
     private boolean isShowClearBtn = true;
+    //endregion
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public IconEditLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -84,107 +89,6 @@ public class IconEditLayout extends LinearLayout {
 
     public IconEditLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        /*TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.IconEditLayout, defStyleAttr, 0);
-        int n = a.getIndexCount();
-        for (int i = 0; i < n; i++) {
-            int attr = a.getIndex(i);
-            if (attr == R.styleable.IconEditLayout_layoutBackground) {
-                layoutColor = a.getColor(attr, Color.parseColor("#FFFFFF"));
-
-            } else if (attr == R.styleable.IconEditLayout_layoutPadding) {
-                layoutPadding = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
-                if (layoutPaddingLeft == 0) {
-                    layoutPaddingLeft = layoutPadding;
-                }
-                if (layoutPaddingTop == 0) {
-                    layoutPaddingTop = layoutPadding;
-                }
-                if (layoutPaddingRight == 0) {
-                    layoutPaddingRight = layoutPadding;
-                }
-                if (layoutPaddingBottom == 0) {
-                    layoutPaddingBottom = layoutPadding;
-                }
-                if (splitLineMarginLeft == 0) {
-                    splitLineMarginLeft = layoutPadding;
-                }
-                if (splitLineMarginRight == 0) {
-                    splitLineMarginRight = layoutPadding;
-                }
-
-            } else if (attr == R.styleable.IconEditLayout_layoutPaddingLeft) {
-                layoutPaddingLeft = a.getDimensionPixelSize(attr, layoutPadding);
-
-            } else if (attr == R.styleable.IconEditLayout_layoutPaddingRight) {
-                layoutPaddingRight = a.getDimensionPixelSize(attr, layoutPadding);
-
-            } else if (attr == R.styleable.IconEditLayout_layoutPaddingTop) {
-                layoutPaddingTop = a.getDimensionPixelSize(attr, layoutPadding);
-
-            } else if (attr == R.styleable.IconEditLayout_layoutPaddingBottom) {
-                layoutPaddingBottom = a.getDimensionPixelSize(attr, layoutPadding);
-
-            } else if (attr == R.styleable.IconEditLayout_layoutRadius) {
-                layoutRadius = a.getDimensionPixelSize(attr, 0);
-
-            } else if (attr == R.styleable.IconEditLayout_layoutStrokeColor) {
-                layoutStrokeColor = a.getColor(attr, Color.parseColor("#999999"));
-
-            } else if (attr == R.styleable.IconEditLayout_layoutStrokeWidth) {
-                layoutStrokeWidth = a.getDimensionPixelSize(attr, 0);
-
-
-                //---------------分割线splitLine----------------
-            } else if (attr == R.styleable.IconEditLayout_splitLineWidth) {
-                splitLineWidth = a.getDimensionPixelSize(attr, 0);
-
-            } else if (attr == R.styleable.IconEditLayout_splitLineMarginLeft) {
-                splitLineMarginLeft = a.getDimensionPixelSize(attr, 0);
-
-            } else if (attr == R.styleable.IconEditLayout_splitLineMarginTop) {
-                splitLineMarginTop = a.getDimensionPixelSize(attr, 0);
-
-            } else if (attr == R.styleable.IconEditLayout_splitLineMarginRight) {
-                splitLineMarginRight = a.getDimensionPixelSize(attr, 0);
-
-            } else if (attr == R.styleable.IconEditLayout_splitLineMarginBottom) {
-                splitLineMarginBottom = a.getDimensionPixelSize(attr, 0);
-
-            } else if (attr == R.styleable.IconEditLayout_splitLineColor) {
-                splitLineColor = a.getColor(attr, Color.parseColor("#999999"));
-
-
-                //---------------图标icon----------------
-            } else if (attr == R.styleable.IconEditLayout_iconHeight) {
-                mImgIconHeight = a.getDimensionPixelSize(attr, 30);
-
-            } else if (attr == R.styleable.IconEditLayout_iconWidth) {
-                mImgIconWidth = a.getDimensionPixelSize(attr, 30);
-
-            } else if (attr == R.styleable.IconEditLayout_iconSrc) {
-                mImgIconSrc = a.getDrawable(attr);
-
-
-                //---------------输入框EditText----------------
-            } else if (attr == R.styleable.IconEditLayout_iconEditText) {
-                mEditTextString = a.getString(attr);
-
-            } else if (attr == R.styleable.IconEditLayout_iconEditTextColor) {
-                mEditTextColor = a.getColor(attr, Color.parseColor("#000000"));
-
-            } else if (attr == R.styleable.IconEditLayout_iconEditTextSize) {
-                mEditTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
-
-
-                //---------------清空按钮imgBtn----------------
-            } else if (attr == R.styleable.IconEditLayout_showDeleteButton) {
-                isShowClearBtn = a.getBoolean(attr, true);
-
-            }
-        }
-        a.recycle();*/
         init(context, attrs);
     }
 
@@ -262,10 +166,7 @@ public class IconEditLayout extends LinearLayout {
         GradientDrawable background = (GradientDrawable) CornerUtil.cornerDrawable(layoutColor, layoutRadius);
         background = CornerUtil.strokeDrawable(background, layoutStrokeWidth, layoutStrokeColor);
         this.setBackground(background);
-        this.setPadding(layoutPaddingLeft + layoutStrokeWidth,
-                layoutPaddingTop + layoutStrokeWidth,
-                layoutPaddingRight + layoutStrokeWidth,
-                layoutPaddingBottom + layoutStrokeWidth);
+        setLayoutPadding(layoutPaddingLeft, layoutPaddingTop, layoutPaddingRight, layoutPaddingBottom, layoutStrokeWidth);
     }
 
     private void initIcon(Context context) {
@@ -355,6 +256,33 @@ public class IconEditLayout extends LinearLayout {
         });
         addView(mImgClearBtn);
     }
+
+
+    //region-----------------------set method for layout-------------------------
+    /**
+     * set layout padding
+     * */
+    public void setLayoutPadding(int layoutPaddingLeft, int layoutPaddingTop, int layoutPaddingRight, int layoutPaddingBottom) {
+        this.layoutPaddingLeft = layoutPaddingLeft;
+        this.layoutPaddingTop = layoutPaddingTop;
+        this.layoutPaddingRight = layoutPaddingRight;
+        this.layoutPaddingBottom = layoutPaddingBottom;
+        setLayoutPadding(layoutPaddingLeft, layoutPaddingTop, layoutPaddingRight, layoutPaddingBottom, layoutStrokeWidth);
+    }
+
+    /**
+     * set layout padding with layoutStrokeWidth for show the stroke
+     * */
+    private void setLayoutPadding(int layoutPaddingLeft, int layoutPaddingTop, int layoutPaddingRight, int layoutPaddingBottom, int layoutStrokeWidth) {
+        this.setPadding(layoutPaddingLeft + layoutStrokeWidth,
+                layoutPaddingTop + layoutStrokeWidth,
+                layoutPaddingRight + layoutStrokeWidth,
+                layoutPaddingBottom + layoutStrokeWidth);
+    }
+    //endregion
+
+
+
 
     public static class CornerUtil {
         public static Drawable cornerDrawable(int bgColor, float cornerRadius) {

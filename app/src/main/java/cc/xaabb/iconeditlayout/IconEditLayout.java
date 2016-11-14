@@ -177,9 +177,9 @@ public class IconEditLayout extends LinearLayout {
     }
 
     private void initSplitLine(Context context) {
-        if (splitLineWidth <= 0) {
+        /*if (splitLineWidth <= 0) {
             return;
-        }
+        }*/
         mViewSplitLine = new View(context);
         LayoutParams param = new LayoutParams((int) splitLineWidth, ViewGroup.LayoutParams.MATCH_PARENT);
         param.bottomMargin = splitLineMarginBottom;
@@ -230,9 +230,6 @@ public class IconEditLayout extends LinearLayout {
     }
 
     private void initClearBtn(Context context) {
-        if (!isShowClearBtn) {
-            return;
-        }
         mImgClearBtn = new ImageView(context);
         LayoutParams param = new LayoutParams(mImgIconWidth, mImgIconWidth);
         param.gravity = Gravity.RIGHT;
@@ -247,6 +244,11 @@ public class IconEditLayout extends LinearLayout {
                 mEditText.setText("");
             }
         });
+        if (isShowClearBtn) {
+            mImgClearBtn.setVisibility(VISIBLE);
+        } else {
+            mImgClearBtn.setVisibility(GONE);
+        }
         addView(mImgClearBtn);
     }
 
@@ -288,21 +290,21 @@ public class IconEditLayout extends LinearLayout {
         this.setLayoutBackground();
     }
 
-    public void setLayoutStrokeColor(int layoutStrokeColor) {
-        this.layoutStrokeColor = layoutStrokeColor;
-    }
-
-    public void setLayoutStrokeWidth(int layoutStrokeWidth) {
-        this.layoutStrokeWidth = layoutStrokeWidth;
-    }
-
-    public void setLayoutRadius(int layoutRadius) {
-        this.layoutRadius = layoutRadius;
-    }
-
-    public void setLayoutColor(int layoutColor) {
-        this.layoutColor = layoutColor;
-    }
+//    public void setLayoutStrokeColor(int layoutStrokeColor) {
+//        this.layoutStrokeColor = layoutStrokeColor;
+//    }
+//
+//    public void setLayoutStrokeWidth(int layoutStrokeWidth) {
+//        this.layoutStrokeWidth = layoutStrokeWidth;
+//    }
+//
+//    public void setLayoutRadius(int layoutRadius) {
+//        this.layoutRadius = layoutRadius;
+//    }
+//
+//    public void setLayoutColor(int layoutColor) {
+//        this.layoutColor = layoutColor;
+//    }
     //endregion
 
 

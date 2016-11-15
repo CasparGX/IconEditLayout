@@ -141,7 +141,7 @@ public class IconEditLayout extends LinearLayout {
             //---------------输入框EditText----------------
             mEditTextString = a.getString(R.styleable.IconEditLayout_iconEditText);
 
-            mEditTextColor = a.getColor(R.styleable.IconEditLayout_iconEditTextColor, Color.parseColor("#000000"));
+            mEditTextColor = a.getColor(R.styleable.IconEditLayout_iconEditTextColor, Color.parseColor("#999999"));
 
             mEditTextSize = a.getDimensionPixelSize(R.styleable.IconEditLayout_iconEditTextSize, (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
@@ -218,10 +218,12 @@ public class IconEditLayout extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (isShowClearBtn && s.length() > 0) {
-                    mImgClearBtn.setVisibility(VISIBLE);
-                } else {
-                    mImgClearBtn.setVisibility(GONE);
+                if (isShowClearBtn) {
+                    if (s.length() > 0) {
+                        mImgClearBtn.setVisibility(VISIBLE);
+                    } else {
+                        mImgClearBtn.setVisibility(GONE);
+                    }
                 }
 
             }

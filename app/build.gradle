@@ -39,7 +39,7 @@ publish {
     userOrg = 'caspar'//bintray.com用户名
     groupId = 'cc.xaabb'//jcenter上的路径
     artifactId = 'iconeditlayout'//项目名称
-    publishVersion = '1.0.2'//版本号
+    publishVersion = '1.0.3'//版本号
     desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
     website = 'https://github.com/CasparGX/IconEditLayout'
 }

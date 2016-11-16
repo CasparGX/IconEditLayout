@@ -312,6 +312,49 @@ public class IconEditLayout extends LinearLayout {
 
 
 
+    //region---------set method for split line---------------
+    public void setSplitLineWidth(float splitLineWidth) {
+        this.splitLineWidth = splitLineWidth;
+    }
+
+    public void setSplitLineMarginLeft(int splitLineMarginLeft) {
+        this.splitLineMarginLeft = splitLineMarginLeft;
+    }
+
+    public void setSplitLineColor(int splitLineColor) {
+        this.splitLineColor = splitLineColor;
+    }
+    //endregion
+
+
+    //region---------set method for EditText---------------
+    public void setmEditTextSize(float mEditTextSize) {
+        this.mEditTextSize = mEditTextSize;
+        mEditText.setTextSize(mEditTextSize);
+    }
+
+    public void setmEditTextColor(int mEditTextColor) {
+        this.mEditTextColor = mEditTextColor;
+        mEditText.setTextColor(mEditTextColor);
+    }
+
+    public void setmEditTextString(String mEditTextString) {
+        this.mEditTextString = mEditTextString;
+        mEditText.setText(mEditTextString);
+    }
+    //endregion
+
+
+    //region---------set method for clear button--------------
+    public void setShowClearBtn(boolean showClearBtn) {
+        isShowClearBtn = showClearBtn;
+        if (!isShowClearBtn) {
+            mImgClearBtn.setVisibility(GONE);
+        }
+    }
+
+
+
 
     public static class CornerUtil {
         public static GradientDrawable cornerDrawable(GradientDrawable bg, int bgColor, float cornerRadius) {

@@ -294,6 +294,23 @@ public class IconEditLayout extends LinearLayout {
     //endregion
 
 
+    //region---------set method for image icon---------------
+    public void setImgIconSize(int mImgIconWidth, int mImgIconHeight) {
+        this.mImgIconHeight = mImgIconHeight;
+        this.mImgIconWidth = mImgIconWidth;
+        LayoutParams param = (LayoutParams) mImgIcon.getLayoutParams();
+        param.width = mImgIconWidth;
+        param.height = mImgIconHeight;
+        mImgIcon.setLayoutParams(param);
+    }
+
+    public void setmImgIconSrc(Drawable mImgIconSrc) {
+        this.mImgIconSrc = mImgIconSrc;
+        mImgIcon.setImageDrawable(mImgIconSrc);
+    }
+    //endregion
+
+
 
 
     public static class CornerUtil {

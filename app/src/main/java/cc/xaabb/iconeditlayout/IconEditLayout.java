@@ -291,22 +291,6 @@ public class IconEditLayout extends LinearLayout {
         this.layoutStrokeColor = strokeColor;
         this.setLayoutBackground();
     }
-
-//    public void setLayoutStrokeColor(int layoutStrokeColor) {
-//        this.layoutStrokeColor = layoutStrokeColor;
-//    }
-//
-//    public void setLayoutStrokeWidth(int layoutStrokeWidth) {
-//        this.layoutStrokeWidth = layoutStrokeWidth;
-//    }
-//
-//    public void setLayoutRadius(int layoutRadius) {
-//        this.layoutRadius = layoutRadius;
-//    }
-//
-//    public void setLayoutColor(int layoutColor) {
-//        this.layoutColor = layoutColor;
-//    }
     //endregion
 
 
